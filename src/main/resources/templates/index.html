@@ -24,6 +24,7 @@
         <form th:action="@{/edit}" th:object="${todo}" method="post" style="display: inline">
             <input type="hidden" name="id" th:value="*{id}">
             <label for="content">[[*{id}]] : </label>
+            <input type="checkbox" name="done_flg" value="1" th:checked="${todo.done_flg} == 1">
             <input type="text" name="content" th:value="*{content}">
             <button>更新</button>
         </form>
