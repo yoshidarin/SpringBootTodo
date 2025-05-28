@@ -11,7 +11,8 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Entityの値を自動採番する
     private Long id;
     private String content;
-    private int done_flg;
+    @Column(name = "done_flg")
+    private boolean doneFlg;
 
     public Long getId() {
         return id;
@@ -29,11 +30,11 @@ public class Todo {
         this.content = content;
     }
 
-    public int getDone_flg() {
-        return done_flg;
+    public boolean getDoneFlg() {
+        return doneFlg;
     }
 
-    public void setDone_flg(int done_flg) {
-        this.done_flg = done_flg;
+    public void setDoneFlg(boolean doneFlg) {
+        this.doneFlg = doneFlg;
     }
 }

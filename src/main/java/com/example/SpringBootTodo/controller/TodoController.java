@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class TodoController {
@@ -15,8 +17,16 @@ public class TodoController {
 
     //  Read
     @GetMapping("/")
-    public String showAllTodo(@ModelAttribute Todo todo, Model model) {
-        model.addAttribute("todos", repository.findAll());
+    public String showAllTodo(@RequestParam(name = "done", required = false) String done, @ModelAttribute Todo todo, Model model) {
+        List<Todo> todos;
+        if ("true".equals(done)) {
+            todos = repository.findByDoneFlg(true);
+        } else if ("false".equals(done)) {
+            todos = repository.findByDoneFlg(false);
+        } else {
+            todos = repository.findAll();
+        }
+        model.addAttribute("todos",  todos);
         return "index";
     }
 
